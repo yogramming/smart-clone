@@ -1,0 +1,2 @@
+smart-clone https://github.com/neovim/neovim.git
+smart-clone git@gitlab.com:myorg/project.git

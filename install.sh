@@ -3,14 +3,14 @@
 
 echo "Installing smart-clone for user: $USER"
 
-curl -fsSL -o ~/.local/bin/smart-clone \
+curl -fsSL -o ~/.local/bin/clone \
   https://raw.githubusercontent.com/yogramming/smart-clone/main/clone.sh
 
-chmod +x ~/.local/bin/smart-clone
+chmod +x ~/.local/bin/clone
 
 echo ""
 echo "✔ smart-clone installed!"
 echo "Make sure ~/.local/bin is in your PATH."
 echo ""
 echo "Usage:"
-echo "  smart-clone <git-url>"
+echo "  clone <git-url>"

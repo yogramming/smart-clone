@@ -1,5 +1,6 @@
 #!/bin/bash
-# Clone repo into structured ~/src/<provider>/<owner>/<repo>/ and open in editor
+# smart-clone by yogramming
+# Clone repo into structured ~/src/<provider>/<owner>/<repo>/ and open in editor (neovim)
 
 if [[ -z "$1" ]]; then
   echo "Usage: clone <git-url>"
@@ -8,7 +9,7 @@ fi
 
 url="$1"
 
-# -------- Determine Git Provider --------
+# Determine the Git Provider
 if echo "$url" | grep -q "github.com"; then
   provider="github"
 elif echo "$url" | grep -q "gitlab.com"; then
@@ -21,7 +22,7 @@ else
   provider="other"
 fi
 
-# -------- Extract owner/user and repo name --------
+# Extract the owner/user and name of the repository
 
 # Works for SSH: git@github.com:owner/repo.git
 # Works for HTTPS: https://github.com/owner/repo.git
@@ -29,7 +30,7 @@ fi
 owner=$(echo "$url" | sed -E 's#(git@|https://)([^/:]+)[:/]([^/]+)/.*#\3#')
 repo=$(basename "$url" .git)
 
-# -------- Create the directory --------
+# Create the directory on user's local machine
 target_dir="$HOME/src/$provider/$owner/$repo"
 
 echo "Cloning into: $target_dir"
@@ -38,7 +39,7 @@ mkdir -p "$HOME/src/$provider/$owner"
 
 git clone "$url" "$target_dir"
 
-# -------- After success, open in editor --------
+# If successful, open in editor. Otherwise echo error message
 if [[ $? -eq 0 ]]; then
   cd "$target_dir" || exit
   echo "Opening repo in Neovim..."
